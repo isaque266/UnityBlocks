@@ -39,8 +39,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		animation.play("idle")
 
-
 	move_and_slide()
+	apply_push_force()
 	
 	for platforms in get_slide_collision_count():
 		var collision = get_slide_collision(platforms)
@@ -52,3 +52,9 @@ func respawn():
 	print(respawn_point.position)
 	if respawn_point:
 		position = respawn_point.position
+
+func apply_push_force():
+	for objects in get_slide_collision_count():
+		var collision = get_slide_collision(objects)
+		if collision.get_collider() is Pushables:
+			collision.get_collider().slide_object(-collision.get_normal())

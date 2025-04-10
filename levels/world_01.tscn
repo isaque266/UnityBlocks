@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://dithgdis7k544"]
+[gd_scene load_steps=33 format=4 uid="uid://dithgdis7k544"]
 
 [ext_resource type="Script" uid="uid://ddeicrb5ub18r" path="res://scripts/world_01.gd" id="1_yw1rq"]
 [ext_resource type="PackedScene" uid="uid://c78k16sm2u2x7" path="res://actors/player.tscn" id="2_qyvkc"]
@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://0eobv357csns" path="res://efeitos sonoros/Puddle Reflections - Aesthetic Lofi.mp3" id="23_ievm4"]
 [ext_resource type="PackedScene" uid="uid://cvfpcoia8jape" path="res://scenes/coin.tscn" id="24_o0pi2"]
 [ext_resource type="PackedScene" uid="uid://bstk5020dltbb" path="res://items/canvas_layer.tscn" id="25_8ypm7"]
+[ext_resource type="PackedScene" uid="uid://de6tphpnu73s3" path="res://items/botao_pressao_2.tscn" id="27_qannr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_samdc"]
 texture = ExtResource("3_oy14d")
@@ -371,10 +372,6 @@ offset_bottom = 361.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("17_ao123")
 
-[node name="BotaoPressao" parent="." node_paths=PackedStringArray("plataforma") instance=ExtResource("18_qannr")]
-position = Vector2(398, 308)
-plataforma = NodePath("../Plataforma")
-
 [node name="Plataforma" parent="." instance=ExtResource("19_xjnak")]
 position = Vector2(316, 326)
 
@@ -415,6 +412,18 @@ autoplay = true
 position = Vector2(440, 304)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("25_8ypm7")]
+
+[node name="Botoes" type="Node" parent="."]
+
+[node name="BotaoPressao" parent="Botoes" node_paths=PackedStringArray("plataforma", "player1") instance=ExtResource("18_qannr")]
+position = Vector2(206, 308)
+plataforma = NodePath("../../Plataforma")
+player1 = NodePath("../../Players/Player")
+
+[node name="BotaoPressao2" parent="Botoes" node_paths=PackedStringArray("plataforma", "player2") instance=ExtResource("27_qannr")]
+position = Vector2(243, 308)
+plataforma = NodePath("../../Plataforma")
+player2 = NodePath("../../Players/MultiplayerPlayer")
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
 [connection signal="body_exited" from="Door" to="Door" method="_on_Door_body_exited"]

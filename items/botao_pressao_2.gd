@@ -1,7 +1,7 @@
 extends Area2D
 @onready var anim = $AnimatedSprite2D
 @export var plataforma: StaticBody2D
-@export var player1: CharacterBody2D
+@export var player2: CharacterBody2D
 
 func _ready():
 	if plataforma:
@@ -13,7 +13,7 @@ func _ready():
 		print("ERRO: Plataforma não encontrada!")
 
 func _on_body_entered(body):
-	if body.is_in_group("players") and body == player1:
+	if body.is_in_group("players") and body == player2:
 		anim.play("pressed")
 		plataforma.get_node("Sprite2D").show()
 		#var sprite2d = plataforma.get_node_or_null("Sprite2D")
@@ -24,7 +24,7 @@ func _on_body_entered(body):
 		
 
 func _on_body_exited(body):
-	if body.is_in_group("players") and body == player1:
+	if body.is_in_group("players") and body == player2:
 		anim.play("idle")
 		plataforma.get_node("Sprite2D").hide()
 		var colisao = plataforma.get_node("CollisionShape2D")
